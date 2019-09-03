@@ -22,6 +22,13 @@
         <version.microprofile>2.2</version.microprofile>
     </properties>
     
+    <repositories>
+        <repository>
+            <id>alerario-repo</id>
+            <url>https://raw.githubusercontent.com/alerario/javainterfaces/master/repositorio</url>
+        </repository>
+    </repositories>
+    
     <dependencies>
         <dependency>
             <groupId>javax</groupId>
@@ -53,6 +60,11 @@
             <version>${version.microprofile}</version>
             <scope>provided</scope>
             <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>alerario</groupId>
+            <artifactId>javainterfaces</artifactId>
+            <version>1.0</version>       
         </dependency>
     </dependencies>
 

@@ -25,7 +25,7 @@ public class ApplicationConfig extends Application{
     }
     
     private void addRestResourceClasses(Set<Class<?>> resources){
-        resources.add(ClienteRest.class);
+        resources.add(henriperfoll.cetej8trabalhofinal.rest.ClienteRest.class);
     }
     
 }

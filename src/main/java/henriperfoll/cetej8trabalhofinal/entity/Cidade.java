@@ -4,26 +4,23 @@
  * and open the template in the editor.
  */
 package henriperfoll.cetej8trabalhofinal.entity;
-
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author Henrique
  */
-@XmlRootElement(name="Cliente")
-public class Cliente implements java.io.Serializable{
-    
-    private long id;
+@XmlRootElement(name="Cidade")
+public class Cidade implements java.io.Serializable{
+    private int codigo;
     private String nome;
-    private Cidade cidade;
 
-    public long getId() {
-        return id;
+    public int getCodigo() {
+        return codigo;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
     }
 
     public String getNome() {
@@ -34,12 +31,12 @@ public class Cliente implements java.io.Serializable{
         this.nome = nome;
     }
 
-    public Cidade getCidade() {
-        return cidade;
+    public Cidade() {
     }
 
-    public void setCidade(Cidade cidade) {
-        this.cidade = cidade;
+    public Cidade(int codigo, String nome) {
+        this.codigo = codigo;
+        this.nome = nome;
     }
     
     

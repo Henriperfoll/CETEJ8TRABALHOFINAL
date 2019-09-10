@@ -1,7 +1,8 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>CETEJ8 Trabalho Final</title>
     </h:head>
@@ -10,6 +11,9 @@
         <h:form>
             Id: <h:inputText value="#{jsfCliente.id}"/> <br/>
             nome: <h:inputText value="#{jsfCliente.nome}"/> <br/>
+            Cidade: <h:selectOneMenu value="#{jsfCliente.codigoCidade}">
+                <f:selectItems value="#{jsfCliente.carregarCidades()}" var="cidade" itemLabel="#{cidade.nome}" itemValue="#{cidade.codigo}"/><br/>
+            </h:selectOneMenu>
             <h:commandButton action="#{jsfCliente.adicionar()}" value="Adicionar"/>
             
         </h:form>
@@ -17,7 +21,7 @@
         
         <h:form>
             Lista de clientes
-            <h:dataTable value="#{jsfCliente.carregarTodos}" var="c">
+            <h:dataTable value="#{jsfCliente.carregarTodos()}" var="c">
                 <h:column>
                     <h:outputText value="#{c.id}" />
                 </h:column>
@@ -25,8 +29,24 @@
                 <h:column>
                     <h:outputText value="#{c.nome}" />
                 </h:column>
+                <h:column>
+                    <h:outputText value="#{c.cidade.nome}"/>
+                </h:column>
             </h:dataTable>
         </h:form>
+        
+<!--        <h:form>
+            Lista de cidades
+            <h:dataTable value="#{jsfCliente.carregarCidades()}" var="cidade">
+                <h:column>
+                    <h:outputText value="#{cidade.codigo}" />
+                </h:column>
+            
+                <h:column>
+                    <h:outputText value="#{cidade.nome}" />
+                </h:column>
+            </h:dataTable>
+        </h:form>-->
     
         <hr/>
         <a href="/CETEJ8TRABALHOFINAL-1.0-SNAPSHOT/webresources/application.wadl">WADL</a>

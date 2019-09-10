@@ -7,6 +7,28 @@
     </h:head>
     <h:body>
         Hello from Facelets
+        <h:form>
+            Id: <h:inputText value="#{jsfCliente.id}"/> <br/>
+            nome: <h:inputText value="#{jsfCliente.nome}"/> <br/>
+            <h:commandButton action="#{jsfCliente.adicionar()}" value="Adicionar"/>
+            
+        </h:form>
         
+        
+        <h:form>
+            Lista de clientes
+            <h:dataTable value="#{jsfCliente.carregarTodos}" var="c">
+                <h:column>
+                    <h:outputText value="#{c.id}" />
+                </h:column>
+            
+                <h:column>
+                    <h:outputText value="#{c.nome}" />
+                </h:column>
+            </h:dataTable>
+        </h:form>
+    
+        <hr/>
+        <a href="/CETEJ8TRABALHOFINAL-1.0-SNAPSHOT/webresources/application.wadl">WADL</a>
     </h:body>
 </html>

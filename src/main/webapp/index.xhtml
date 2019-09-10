@@ -8,17 +8,18 @@
     </h:head>
     <h:body>
         Hello from Facelets
+        <br/>
         <h:form>
-            Id: <h:inputText value="#{jsfCliente.id}"/> <br/>
+            Id: <h:inputText disabled="true" value="#{jsfCliente.id}"/> <br/>
             nome: <h:inputText value="#{jsfCliente.nome}"/> <br/>
             Cidade: <h:selectOneMenu value="#{jsfCliente.codigoCidade}">
-                <f:selectItems value="#{jsfCliente.carregarCidades()}" var="cidade" itemLabel="#{cidade.nome}" itemValue="#{cidade.codigo}"/><br/>
-            </h:selectOneMenu>
-            <h:commandButton action="#{jsfCliente.adicionar()}" value="Adicionar"/>
+                <f:selectItems value="#{jsfCliente.carregarCidades()}" var="cidade" itemLabel="#{cidade.nome}" itemValue="#{cidade.codigo}"/>
+            </h:selectOneMenu><br/>
+            <h:commandButton action="#{jsfCliente.adicionar()}" rendered="#{jsfCliente.modo == 1}" value="Adicionar"/>
             
         </h:form>
         
-        
+        <br/>
         <h:form>
             Lista de clientes
             <h:dataTable value="#{jsfCliente.carregarTodos()}" var="c">
@@ -32,21 +33,15 @@
                 <h:column>
                     <h:outputText value="#{c.cidade.nome}"/>
                 </h:column>
+                <h:column>
+                    <h:commandLink action="#{jsfCliente.alterar()}">Alterar</h:commandLink>
+                </h:column>
+                <h:column>
+                    <h:commandLink action="#{jsfCliente.deletar(c.id)}">Deletar</h:commandLink>
+                </h:column>
             </h:dataTable>
         </h:form>
-        
-<!--        <h:form>
-            Lista de cidades
-            <h:dataTable value="#{jsfCliente.carregarCidades()}" var="cidade">
-                <h:column>
-                    <h:outputText value="#{cidade.codigo}" />
-                </h:column>
-            
-                <h:column>
-                    <h:outputText value="#{cidade.nome}" />
-                </h:column>
-            </h:dataTable>
-        </h:form>-->
+
     
         <hr/>
         <a href="/CETEJ8TRABALHOFINAL-1.0-SNAPSHOT/webresources/application.wadl">WADL</a>

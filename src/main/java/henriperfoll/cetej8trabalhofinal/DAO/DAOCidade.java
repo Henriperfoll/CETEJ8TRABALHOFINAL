@@ -17,20 +17,16 @@ import javax.ws.rs.core.MediaType;
  */
 public class DAOCidade {
 
-    private static ArrayList<Cidade> listaCidades = new ArrayList<>();
-
-    public static ArrayList<Cidade> getListaCidades() {
-        return listaCidades;
-    }
-
-    public void carregaCidades() {
+    public ArrayList<Cidade> carregaCidades() {
         Client client = Client.create();
         WebResource resource = client.resource("http://maventest.herokuapp.com/mavenTest-1.0-SNAPSHOT/webresources/cidade");
         resource.type(MediaType.APPLICATION_JSON);
         Cidade[] cidades = resource.get(Cidade[].class);
+        ArrayList<Cidade> listaCidades = new ArrayList<>();
         for(Cidade c : cidades){
-            this.listaCidades.add(c);
+            listaCidades.add(c);
         }
+        return listaCidades;
     }
     
     public Cidade carregaCidade(long id){

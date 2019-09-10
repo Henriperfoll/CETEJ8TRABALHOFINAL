@@ -20,11 +20,28 @@ import java.util.ArrayList;
 @RequestScoped
 public class JsfCliente {
     
-    private int id;
+    public final static int ADICIONAR = 1;
+    public final static int ALTERAR = 2;
+    
+    private long id;
     private String nome;
     private long codigoCidade;
+    private int modo;
 
     public JsfCliente() {
+        this.nextId();
+        this.modo = ADICIONAR;
+    }
+    
+    private void nextId(){
+        ArrayList<Cliente> lista = new DAOCliente().carregarTodos();
+        if(lista.size() > 0){
+            for(Cliente c : lista){
+                id = c.getId()+1;
+            }
+        }else{
+            id = 1;
+        }
     }
 
     public ArrayList<Cliente> carregarTodos() {
@@ -32,8 +49,8 @@ public class JsfCliente {
     }
     
     public ArrayList<Cidade> carregarCidades(){
-        new DAOCidade().carregaCidades();
-        return new DAOCidade().getListaCidades();
+//        new DAOCidade().carregaCidades();
+        return new DAOCidade().carregaCidades();
     }
 
     public void adicionar() {
@@ -42,13 +59,24 @@ public class JsfCliente {
         c.setNome(nome);
         c.setCidade(new DAOCidade().carregaCidade(this.codigoCidade));
         new DAOCliente().adicionar(c);
+        this.nextId();
+        this.codigoCidade = new DAOCidade().carregaCidades().get(0).getCodigo();
+        this.nome = "";
+    }
+    
+    public void deletar(long id){
+        new DAOCliente().deleta(id);
+    }
+    
+    public void alterar(){
+        this.modo = ALTERAR;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -67,6 +95,15 @@ public class JsfCliente {
     public void setCodigoCidade(long codigoCidade) {
         this.codigoCidade = codigoCidade;
     }
+
+    public int getModo() {
+        return modo;
+    }
+
+    public void setModo(int modo) {
+        this.modo = modo;
+    }
+    
     
     
 }

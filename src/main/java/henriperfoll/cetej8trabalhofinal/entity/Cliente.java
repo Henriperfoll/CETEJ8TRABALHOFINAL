@@ -5,10 +5,33 @@
  */
 package henriperfoll.cetej8trabalhofinal.entity;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  *
  * @author Henrique
  */
-public class Cliente {
+@XmlRootElement(name="Cliente")
+public class Cliente implements java.io.Serializable{
+    
+    private long id;
+    private String nome;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+    
     
 }

@@ -9,15 +9,27 @@
     <h:body>
         Hello from Facelets
         <br/>
-        <h:form>
+        <h:form rendered="#{jsfCliente.modo == 1}">
             Id: <h:inputText disabled="true" value="#{jsfCliente.id}"/> <br/>
+            <h:inputHidden value="#{jsfCliente.id}"/>
+            <h:inputHidden value="#{jsfCliente.modo}"/>
             nome: <h:inputText value="#{jsfCliente.nome}"/> <br/>
             Cidade: <h:selectOneMenu value="#{jsfCliente.codigoCidade}">
                 <f:selectItems value="#{jsfCliente.carregarCidades()}" var="cidade" itemLabel="#{cidade.nome}" itemValue="#{cidade.codigo}"/>
             </h:selectOneMenu><br/>
-            <h:commandButton action="#{jsfCliente.adicionar()}" rendered="#{jsfCliente.modo == 1}" value="Adicionar"/>
-            
+            <h:commandButton action="#{jsfCliente.adicionar()}" value="Adicionar"/>
         </h:form>
+        <h:form rendered="#{jsfCliente.modo == 2}">
+            Id: <h:inputText disabled="true" value="#{jsfCliente.id}"/> <br/>
+            <h:inputHidden value="#{jsfCliente.id}"/>
+            <h:inputHidden value="#{jsfCliente.modo}"/>
+            nome: <h:inputText value="#{jsfCliente.nome}"/> <br/>
+            Cidade: <h:selectOneMenu value="#{jsfCliente.codigoCidade}">
+                <f:selectItems value="#{jsfCliente.carregarCidades()}" var="cidade" itemLabel="#{cidade.nome}" itemValue="#{cidade.codigo}"/>
+            </h:selectOneMenu><br/>
+            <h:commandButton action="#{jsfCliente.alterar(jsfCliente.id)}"  value="Alterar"/>
+        </h:form>
+        
         
         <br/>
         <h:form>
@@ -34,7 +46,7 @@
                     <h:outputText value="#{c.cidade.nome}"/>
                 </h:column>
                 <h:column>
-                    <h:commandLink action="#{jsfCliente.alterar()}">Alterar</h:commandLink>
+                    <h:commandLink action="#{jsfCliente.modoAlterar(c.id)}">Alterar</h:commandLink>
                 </h:column>
                 <h:column>
                     <h:commandLink action="#{jsfCliente.deletar(c.id)}">Deletar</h:commandLink>

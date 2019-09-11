@@ -13,7 +13,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
 import henriperfoll.cetej8trabalhofinal.entity.Cliente;
-import henriperfoll.cetej8trabalhofinal.DAO.DAOCliente;
+import henriperfoll.cetej8trabalhofinal.DAO.*;
 import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -49,11 +49,12 @@ public class ClienteRest {
     
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    @Path("/{id}/{nome}")
-    public void post(@PathParam("id") long id, @PathParam("nome") String nome){
+    @Path("/{id}/{nome}/{codigoCidade}")
+    public void post(@PathParam("id") long id, @PathParam("nome") String nome, @PathParam("codigoCidade") long codCidade){
         Cliente c = new Cliente();
         c.setId(id);
         c.setNome(nome);
+        c.setCidade(new DAOCidade().carregaCidade(codCidade));
         new DAOCliente().adicionar(c);
     }
     
@@ -66,10 +67,11 @@ public class ClienteRest {
     
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
-    @Path("/{id}/{nome}")
-    public void put(@PathParam("id") long id,@PathParam("nome") String nome){
+    @Path("/{id}/{nome}/{codigoCidade}")
+    public void put(@PathParam("id") long id,@PathParam("nome") String nome, @PathParam("codigoCidade") long codCidade){
         Cliente c = new DAOCliente().carregaPorId(id);
         c.setNome(nome);
+        c.setCidade(new DAOCidade().carregaCidade(codCidade));
         new DAOCliente().alterar(c);
     }
     

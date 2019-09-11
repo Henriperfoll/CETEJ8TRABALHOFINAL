@@ -26,11 +26,12 @@ public class JsfCliente {
     private long id;
     private String nome;
     private long codigoCidade;
-    private int modo;
+    private int modo = ADICIONAR;
+    private long idAlteracao;
 
     public JsfCliente() {
-        this.nextId();
-        this.modo = ADICIONAR;
+        if(modo == ADICIONAR)
+            nextId();
     }
     
     private void nextId(){
@@ -59,6 +60,10 @@ public class JsfCliente {
         c.setNome(nome);
         c.setCidade(new DAOCidade().carregaCidade(this.codigoCidade));
         new DAOCliente().adicionar(c);
+        this.limparCampos();
+    }
+    
+    public void limparCampos(){
         this.nextId();
         this.codigoCidade = new DAOCidade().carregaCidades().get(0).getCodigo();
         this.nome = "";
@@ -68,8 +73,23 @@ public class JsfCliente {
         new DAOCliente().deleta(id);
     }
     
-    public void alterar(){
+    public void modoAlterar(long id){
         this.modo = ALTERAR;
+        Cliente cliente = new DAOCliente().carregaPorId(id);
+        this.id = cliente.getId();
+        this.nome = cliente.getNome();
+        this.codigoCidade = cliente.getCidade().getCodigo();
+        this.idAlteracao = this.id;
+    }
+    
+    public void alterar(long id){
+        this.modo = ADICIONAR;
+        Cliente c = new Cliente();
+        c.setCidade(new DAOCidade().carregaCidade(this.codigoCidade));
+        c.setId(id);
+        c.setNome(nome);
+        new DAOCliente().alterar(c);        
+        this.limparCampos();
     }
 
     public long getId() {
@@ -102,6 +122,14 @@ public class JsfCliente {
 
     public void setModo(int modo) {
         this.modo = modo;
+    }
+
+    public long getIdAlteracao() {
+        return idAlteracao;
+    }
+
+    public void setIdAlteracao(long idAlteracao) {
+        this.idAlteracao = idAlteracao;
     }
     
     

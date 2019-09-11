@@ -27,7 +27,12 @@ public class DAOCliente {
     public void alterar(Cliente cliente){
         for(Cliente c : this.listaClientes){
             if(c.getId() == cliente.getId()){
+                System.out.println("Alterar");
+                this.listaClientes.remove(c);
                 c.setNome(cliente.getNome());
+                c.setCidade(cliente.getCidade());
+                this.adicionar(c);
+                return;
             }
         }
     }

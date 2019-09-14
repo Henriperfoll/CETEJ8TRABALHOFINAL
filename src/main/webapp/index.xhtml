@@ -5,11 +5,23 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>CETEJ8 Trabalho Final</title>
+        <style>
+            body {
+                background-color: lightgray;
+            }
+        </style>
     </h:head>
     <h:body>
-        Hello from Facelets
+        <h1>Olá! Bem vindo ao trabalho final da matéria CETEJ8 do curso de especilização em Java</h1>
+        <h3>Desenvolvedor: Henrique Perfoll Neto</h3>
+        <a href="https://github.com/Henriperfoll/CETEJ8TRABALHOFINAL">Repositório no github</a><br/>    
+        <p>O objetivo deste trabalho é consumir as cidades geradas pelo <a href="http://maventest.herokuapp.com/mavenTest-1.0-SNAPSHOT/">Serviço de cidades</a></p>
+        <p>E relacionalas com os dados de clientes cadastrados.</p>
+        <hr/>
         <br/>
+        
         <h:form rendered="#{jsfCliente.modo == 1}">
+            <h4>Adicione um cliente</h4><br/>
             Id: <h:inputText disabled="true" value="#{jsfCliente.id}"/> <br/>
             <h:inputHidden value="#{jsfCliente.id}"/>
             <h:inputHidden value="#{jsfCliente.modo}"/>
@@ -20,6 +32,7 @@
             <h:commandButton action="#{jsfCliente.adicionar()}" value="Adicionar"/>
         </h:form>
         <h:form rendered="#{jsfCliente.modo == 2}">
+            <h4>Altere as informações do cliente</h4><br/>
             Id: <h:inputText disabled="true" value="#{jsfCliente.id}"/> <br/>
             <h:inputHidden value="#{jsfCliente.id}"/>
             <h:inputHidden value="#{jsfCliente.modo}"/>
@@ -35,14 +48,18 @@
         <h:form>
             Lista de clientes
             <h:dataTable value="#{jsfCliente.carregarTodos()}" var="c">
+                
                 <h:column>
+                    <f:facet name="header">ID</f:facet>
                     <h:outputText value="#{c.id}" />
                 </h:column>
             
                 <h:column>
+                    <f:facet name="header">Nome</f:facet>
                     <h:outputText value="#{c.nome}" />
                 </h:column>
                 <h:column>
+                    <f:facet name="header">Cidade</f:facet>
                     <h:outputText value="#{c.cidade.nome}"/>
                 </h:column>
                 <h:column>
